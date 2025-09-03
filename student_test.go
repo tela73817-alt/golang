@@ -189,7 +189,7 @@ func TestGetLowestGrade_WithGrades_ReturnCorrectLowest(t *testing.T) {
 	assert.NotNil(t, lowest)
 }
 
-func TesstGetGradeCount_NoGrades_ReturnZero(t *testing.T) {
+func TestGetGradeCount_NoGrades_ReturnZero(t *testing.T) {
 	student := NewStudent("Jane Doe")
 	count := student.GetGradeCount()
 	assert.Equal(t, 0, count)
@@ -206,12 +206,12 @@ func TestGetGradeCount_WithGrades_ReturnCorrectCount(t *testing.T) {
 	assert.NotNil(t, count)
 }
 
-func TestString_NoGrades_ReturnCorrectString(t *testing.T) {
+func TestString_ValidStudent_ReturnCorrectString(t *testing.T) {
 	student := NewStudent("Jane Doe")
 	student.AddGrade(88)
 	student.AddGrade(92)
 
-	expected := "Sinh viên: Rita, Số điểm: 2, Điểm TB: 90.00, Xếp loại: A"
+	expected := "Sinh viên: Jane Doe, Số điểm: 2, Điểm TB: 90.00, Xếp loại: A"
 
 	// Act
 	result := student.String()
