@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>golang: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">tela/golang/student.go (95.2%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package main
+
+import (
+        "errors"
+        "fmt"
+        "strings"
+)
+
+type Student struct {
+        Name  string
+        Grade []float64
+}
+
+func NewStudent(name string) *Student <span class="cov8" title="1">{
+        if strings.TrimSpace(name) == "" </span><span class="cov8" title="1">{
+                return nil
+        }</span>
+
+        <span class="cov8" title="1">return &amp;Student{
+                Name:  name,
+                Grade: []float64{},
+        }</span>
+}
+
+func (s *Student) AddGrade(grade float64) error <span class="cov8" title="1">{
+        if grade &lt; 0 || grade &gt; 100 </span><span class="cov8" title="1">{
+                return errors.New("grade must be between 0 and 100")
+        }</span>
+
+        <span class="cov8" title="1">s.Grade = append(s.Grade, grade)
+        return nil</span>
+}
+
+func (s *Student) GetAverage() float64 <span class="cov8" title="1">{
+        if len(s.Grade) == 0 </span><span class="cov8" title="1">{
+                return 0
+        }</span>
+
+        <span class="cov8" title="1">total := 0.0
+        for _, g := range s.Grade </span><span class="cov8" title="1">{
+                total += g
+        }</span>
+
+        <span class="cov8" title="1">return total / float64(len(s.Grade))</span>
+}
+
+func (s *Student) GetLetterGrade() string <span class="cov8" title="1">{
+        total := 0.0
+        for _, g := range s.Grade </span><span class="cov8" title="1">{
+                total += g
+        }</span>
+
+        <span class="cov8" title="1">average := total / float64(len(s.Grade))
+
+        if average &gt;= 90 </span><span class="cov8" title="1">{
+                return "A"
+        }</span> else<span class="cov8" title="1"> if average &gt;= 80 </span><span class="cov8" title="1">{
+                return "B"
+        }</span> else<span class="cov8" title="1"> if average &gt;= 70 </span><span class="cov8" title="1">{
+                return "C"
+        }</span> else<span class="cov8" title="1"> if average &gt;= 60 </span><span class="cov8" title="1">{
+                return "D"
+        }</span> else<span class="cov8" title="1"> {
+                return "F"
+        }</span>
+}
+
+func (s *Student) GetHighestGrade() float64 <span class="cov8" title="1">{
+        if len(s.Grade) == 0 </span><span class="cov8" title="1">{
+                return 0
+        }</span>
+
+        <span class="cov8" title="1">maxGrade := s.Grade[0]
+        for _, g := range s.Grade </span><span class="cov8" title="1">{
+                if g &gt; maxGrade </span><span class="cov8" title="1">{
+                        maxGrade = g
+                }</span>
+        }
+
+        <span class="cov8" title="1">return maxGrade</span>
+}
+
+func (s *Student) GetLowestGrade() float64 <span class="cov8" title="1">{
+        if len(s.Grade) == 0 </span><span class="cov8" title="1">{
+                return 0
+        }</span>
+
+        <span class="cov8" title="1">minGrade := s.Grade[0]
+        for _, g := range s.Grade </span><span class="cov8" title="1">{
+                if g &lt; minGrade </span><span class="cov8" title="1">{
+                        minGrade = g
+                }</span>
+        }
+
+        <span class="cov8" title="1">return minGrade</span>
+}
+
+func (s *Student) GetGradeCount() int <span class="cov0" title="0">{
+        return len(s.Grade)
+}</span>
+
+func (s *Student) String() string <span class="cov0" title="0">{
+        return fmt.Sprintf("Sinh viên: %s, Số điểm: %d, Điểm TB: %.2f, Xếp loại: %s",
+                s.Name, s.GetGradeCount(), s.GetAverage(), s.GetLetterGrade())
+}</span>
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
