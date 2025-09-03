@@ -55,7 +55,7 @@
 			<div id="nav">
 				<select id="files">
 				
-				<option value="file0">tela/golang/student.go (95.2%)</option>
+				<option value="file0">tela/golang/student.go (100.0%)</option>
 				
 				</select>
 			</div>
@@ -166,11 +166,11 @@ func (s *Student) GetLowestGrade() float64 <span class="cov8" title="1">{
         <span class="cov8" title="1">return minGrade</span>
 }
 
-func (s *Student) GetGradeCount() int <span class="cov0" title="0">{
+func (s *Student) GetGradeCount() int <span class="cov8" title="1">{
         return len(s.Grade)
 }</span>
 
-func (s *Student) String() string <span class="cov0" title="0">{
+func (s *Student) String() string <span class="cov8" title="1">{
         return fmt.Sprintf("Sinh viên: %s, Số điểm: %d, Điểm TB: %.2f, Xếp loại: %s",
                 s.Name, s.GetGradeCount(), s.GetAverage(), s.GetLetterGrade())
 }</span>
